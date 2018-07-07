@@ -1,0 +1,31 @@
+body {  
+  background: url('./emails.jpg') no-repeat;
+  background-size: cover;
+}
+.App {
+  width: 80%;
+  margin: 0 auto;
+  height: auto;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+nav {
+  width: 100%;
+}
+.textbox {
+  background-color: white;
+  margin: 30px;
+  box-shadow: black 1px 1px 1px;
+  border-radius: 3px;
+  padding: 25px;
+  opacity: 1;
+  filter: alpha(opacity=60); /* For IE8 and earlier */
+}
+.textbox p { 
+  margin: 5%;
+  font-family: Verdana;
+  font-size: 12px;
+  color: #000000;
+}
