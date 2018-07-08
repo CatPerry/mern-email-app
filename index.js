@@ -28,5 +28,5 @@ app.use(passport.session());
 require('./routes/authRoutes')(app);
 
 //this listens for herokus dynamic port in a prodcution env.
-const PORT = process.env.port || 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT);
