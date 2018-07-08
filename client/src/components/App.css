@@ -11,6 +11,9 @@ body {
   -o-background-size: cover;
   background-size: cover;
 }
+li {
+  margin: 0 10px;
+}
 nav {
   width: 100%;
 }
