@@ -24,5 +24,9 @@
     "nodemon": "^1.17.5",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0"
+  },
+  "devDependencies": {
+    "babel-loader": "^6.2.5",
+    "webpack-dev-server": "^1.16.2"
   }
 }
