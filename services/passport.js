@@ -26,6 +26,7 @@ passport.use(
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
       callbackURL: '/auth/google/callback',
+      proxy: true
       //this arrow function is where wer save user infotmation oto our database
     }, 
     //ASYNC AWAIT, ES2015
