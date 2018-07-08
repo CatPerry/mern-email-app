@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Payments from './Payments';
 
 class Header extends Component {
   //this helper method is where we inspect whther the user is logged in or not. This is a great place to use a switch statement
@@ -9,11 +10,12 @@ class Header extends Component {
       case null:
         return;
       case false: 
-        return (
-        <li> <a href="/auth/google">Log In with Google</a> </li>
-        );
+        return <li><a href="/auth/google">Log In with Google</a> </li>
       default:
-        return <li><a href="/api/logout">Log Out</a></li>;
+        return [
+          <li key="1"><Payments /></li>,
+          <li key="2"><a href="/api/logout">Log Out</a></li>
+        ]
     }
   }
 
