@@ -32,6 +32,17 @@ app.use(passport.session());
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
 
+//the below configuration will make sure that EXPRESS behaves correctly when in the PRODuction environment. It will only be run in production
+if (process.env.NODE_ENV === 'production') {
+  // Express will serve up production assets, like main.js file
+  app.use(express.static('client/build'));
+  //Express will serve up the index.html file if id doesn't recognize the route. And this is the catch-all get request that serves up the index.html if no other middleware or route reqs via React routes or Express are able t served given what the browser/client is looking for.
+  const path = require('path');
+  app.get('*', (req,res) => {
+    res.sendFile(path.resolve(___dirname, 'client', 'build', 'index.html'));
+  });
+}
+
 //this listens for herokus dynamic port in a prodcution env.
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
