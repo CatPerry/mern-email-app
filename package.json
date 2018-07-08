@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "concurrently": "^3.6.0",
     "cookie-session": "^2.0.0-beta.3",
     "eslint": "^5.0.1",
@@ -24,7 +25,8 @@
     "nodemon": "^1.17.5",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
-    "react-stripe-checkout": "^2.6.3"
+    "react-stripe-checkout": "^2.6.3",
+    "stripe": "^6.2.1"
   },
   "devDependencies": {
     "babel-loader": "^6.2.5",

@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
+const bodyParser = require('body-parser');
 const keys = require('./config/keys');
 
 //since we're not using passort here in a typical way with new instances we dont even need the instance variable; just require etc. 
@@ -14,7 +15,9 @@ mongoose.connect(keys.mongoURI);
 
 const app = express();
 
+
 //all these app.use call are using middleware, hwich are small functions that acan be used to modify incoming reqs to our app before they're sent off to route handlers. They can be wired up to handl eall actions or only ceratin action. You choose.
+app.use(bodyParser.json());
 app.use(
   //we're calling cookieSession and within it we'll provide a configuration object.   
   cookieSession({
@@ -25,7 +28,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+//double parens here export a funciton
 require('./routes/authRoutes')(app);
+require('./routes/billingRoutes')(app);
 
 //this listens for herokus dynamic port in a prodcution env.
 const PORT = process.env.PORT || 5000;

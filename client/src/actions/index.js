@@ -5,8 +5,12 @@ import { FETCH_USER } from './types';
 export const fetchUser = () => async dispatch => {  
   const res = await axios.get('/api/current_user');
   dispatch({ type: FETCH_USER, payload: res.data});
-}
+};
 
+export const handleToken = token => async dispatch => {
+  const res = await axios.post('/api/stripe', token);  
+  dispatch({ type: FETCH_USER, payload: res.data });
+};
 
 
 //instead this function call will return a function. And note: the purpos of eteh midleware is to inspect whatever is returned from a request like this. When thunk sees that we're retuning a FUNCTIOn it will instead automatically pass in the DISPATCH FUNCTION, from where our actions will be funneld to the different reducers AT ANY TIME.
