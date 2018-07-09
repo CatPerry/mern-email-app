@@ -1,7 +1,7 @@
 const passport = require('passport');
 
 //we need to make app accessible from/to here so we'll use module.exports and an arrow function.
-module.exports = (app) => {
+module.exports = app => {
   //this is a route handler
   app.get(
     '/auth/google',
