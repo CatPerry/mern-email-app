@@ -11,6 +11,7 @@ const keys = require('./config/keys');
 require('./models/user');
 require('./services/passport');
 
+mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI);
 
 const app = express();
@@ -38,8 +39,8 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
   //Express will serve up the index.html file if id doesn't recognize the route. And this is the catch-all get request that serves up the index.html if no other middleware or route reqs via React routes or Express are able t served given what the browser/client is looking for.
   const path = require('path');
-  app.get('*', (req,res) => {
-    res.sendFile(path.resolve(___dirname, 'client', 'build', 'index.html'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
 
