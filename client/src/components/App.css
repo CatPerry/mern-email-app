@@ -3,18 +3,27 @@ body {
   background-size: cover;
 }
 .App {
-  width: 80%;
-  margin: 0 auto;
-  height: auto;
+  width: 100%;
+  margin: 0;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
+.container {
+  margin: 0;
+  width: 100%;
+}
 li {
   margin: 0 10px;
 }
 nav {
+  width: 100%;
+  margin: 0 auto;
+  background-color: rgba(0, 102, 128, 0.555);
+  padding-left: 15px;
+}
+.nav-wrapper {
   width: 100%;
 }
 .textbox {

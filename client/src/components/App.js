@@ -6,9 +6,9 @@ import './App.css';
 import './emails.jpg';
 
 import Header from './Header';
-import Landing from "./Landing";
+import Landing from './Landing';
+import Dashboard from './Dashboard'
 
-const Dashboard = () => <h2>Dashboard</h2>;
 const SurveyNew = () => <h2>SurveyNew</h2>;
 
 
