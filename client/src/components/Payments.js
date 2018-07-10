@@ -21,5 +21,6 @@ class Payments extends Component {
     );
   }
 }
+console.log(process.env.REACT_APP_STRIPE_KEY);
 
 export default connect(null, actions)(Payments);
