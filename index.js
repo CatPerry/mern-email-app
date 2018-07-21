@@ -33,6 +33,8 @@ app.use(passport.session());
 //double parens here export a funciton
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
+require('./routes/surveyRoutes')(app);
+
 
 //the below configuration will make sure that EXPRESS behaves correctly when in the PRODuction environment. It will only be run in production
 if (process.env.NODE_ENV === 'production') {
