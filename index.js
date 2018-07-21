@@ -9,6 +9,7 @@ const keys = require('./config/keys');
 
 //since we're not using passort here in a typical way with new instances we dont even need the instance variable; just require etc. 
 require('./models/user');
+require('./models/Survey');
 require('./services/passport');
 
 mongoose.Promise = global.Promise;
