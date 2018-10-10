@@ -5,6 +5,7 @@ const { Schema} = mongoose;
 
 const recipientSchema = new Schema({
   email: String,
+  // clicked property prevents duplicate clicks
   responded: { type: Boolean, default: false}
 });
 

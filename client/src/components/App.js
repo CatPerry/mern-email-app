@@ -7,10 +7,8 @@ import './emails.jpg';
 
 import Header from './Header';
 import Landing from './Landing';
-import Dashboard from './Dashboard'
-
-const SurveyNew = () => <h2>SurveyNew</h2>;
-
+import Dashboard from './Dashboard';
+import SurveyNew from './surveys/SurveyNew';
 
 class App extends Component { 
   componentDidMount() {
@@ -18,25 +16,24 @@ class App extends Component {
   }
 
   render() {
-    return (
+    return ( 
       <div className="App">
         <BrowserRouter>
           {/* You can generally only display ONE child at most in BrowserRouter. so only one div for example*/}
-          <div className="container">
+          <div>
             {/* the contents of the header will be determined by redux */}
-            <Header/>
-
+            <Header />
+            
             {/* exact below is a little JSX sauce to make sure that Landing dosent appear on dashboard to for example */}
             <Route exact path="/" component={Landing} />
             <Route exact path="/surveys" component={Dashboard} />
             <Route path="/surveys/new" component={SurveyNew} />
           </div>
         </BrowserRouter>
-        
+        <div className="spacer"></div>
       </div>
-    );
+    )
   };
 };
-
 
 export default connect(null, actions)(App);

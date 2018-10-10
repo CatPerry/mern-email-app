@@ -7,7 +7,7 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 const keys = require('./config/keys');
 
-//since we're not using passort here in a typical way with new instances we dont even need the instance variable; just require etc. 
+//since we're not using passort here in a typical way with new instances we dont even need the instance variable; just require etc. Note: I didnt import Recipent.js because it's already required in the Survey.js file
 require('./models/user');
 require('./models/Survey');
 require('./services/passport');
@@ -30,7 +30,8 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-//double parens here export a funciton
+//ROUTE HANDLERS
+//double parens here export the route funciton
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
 require('./routes/surveyRoutes')(app);
