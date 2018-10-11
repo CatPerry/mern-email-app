@@ -6,35 +6,64 @@ const requireLogin = require('../middlewares/requireLogin');
 const requireCredits = require('../middlewares/requireCredits');
 const Mailer = require('../services/Mailer');
 const surveyTemplate = require('../services/emailTemplates/surveyTemplate')
-
 const Survey = mongoose.model('surveys');
 
 module.exports = app => {
-  app.get('/api/surveys/thanks', (req, res) => {
-    res.send('Thanks for your feedback!');
+  //the URL path colons are allowed in Express as wildcard/dynamic/paths, just like the Path class below
+  app.get("/api/surveys/:surveyId/:choice", (req, res) => {
+    res.send("Thanks for your feedback!");
   });
 
   app.post('/api/surveys/webhooks', (req, res) => {
+    const p = new Path('/api/surveys/:surveyId/:choice');
+
     //email and url are using ES6 destructuring, so we're not papssing in the entire event object
-    //but instead are passing in only the properties we care about. 
-    const events = _.map(req.body, ({email, url}) => {
-      //URL is a function that we have access to through NODEjs. 
-      const pathname = new URL(url).pathname;
-      //this uses the Path method: the :colon specifies what item we want ot extract
-      const p = new Path('/api/surveys/:surveyId/:choice');
-      const match = p.test(pathname);
-      if (match) {
-        return { email, surveyId: match.surveyId, choice: match.choice };
-      }
-    });
-    //the lodash lib can help us with compact to avoid sendign anythign tha tis not an object, is undefined or is null
-    //such as a url that doesnt contain /api/surveys for example 
-    const compactEvents = _.compact(events);
-    //lodash lib has a uniqBy fuction that we can say then, go thru compactEvents and look at the
-    //email AND the surveyId key/value pairs to see if there are any duplicates, and if so delete them
-    //a single user can vote on teo different surveys but they cannot vote on the same survey multiple times.
-    const uniqueEvents = _.uniqBy(compactEvents, 'email', 'surveyId');
-    console.log(uniqueEvents);
+    //but instead are passing in only the properties we care about.
+    //noe we're using lodash's .chain helper makes repetititve itteration cleanre 
+    _.chain(req.body)
+      .map(({email, url}) => {
+        //URL is a function that we have access to through NODEjs. 
+        //this uses the Path method: the :colon specifies what item we want ot extract
+        const match = p.test(new URL(url).pathname);
+        if (match) {
+          return { email, surveyId: match.surveyId, choice: match.choice };
+        }
+      })
+      //the lodash lib can help us with compact to avoid sendign anythign tha tis not an object, is undefined or is null
+      //such as a url that doesnt contain /api/surveys for example 
+      .compact()
+      //lodash lib has a uniqBy fuction that we can say then, go thru compactEvents and look at the
+      //email AND the surveyId key/value pairs to see if there are any duplicates, and if so delete them
+      //a single user can vote on teo different surveys but they cannot vote on the same survey multiple times.
+      .uniqBy('email', 'surveyId')
+        //using es6 destructing to pull surveyId, email and choice rather than the entire event object
+      .each(({ surveyId, email, choice }) => {
+        //this updateOne method is supplied by the Mongoose class
+        //it's a two in one: it is a combo of Mongoose findOne method and update. It'll go find the record
+        //the meets that criteria and then update it to the second object setup.
+        Survey.updateOne({
+          //Mongo DB uses _id NOT id
+          _id: surveyId,
+          recipients: {
+            $elemMatch: { email: email, responded: false }
+            }
+          },
+          {
+            //this $inc is a Mongo operator. I tsays find the choice property and increments it by 1.
+            // and this is using ES6 Key interpolation. and it allows it to increment the right choice
+            $inc: { [choice]: 1 },
+            //THE $set mongo operator says look at tha recipients subdocument collection and find the recipient key that 
+            //matches with this recipient we really care about, we use the dollar sign. 
+            //It works with the $elemMatch method, and sets the property responded to true
+            $set: { 'recipients.$.responded': true },
+            //Mongo needs .exec() funciton. Even though this is an async call, we dont need ot use an async /await
+            // because Sendrid doesnt need a response back. Otherwise we'd need to.
+            lastResponded: new Date()
+          }).exec()
+      })
+      //value will always be the last return statement in the .chain
+      .value();
+
     res.send({})
   });
 
