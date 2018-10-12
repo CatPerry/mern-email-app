@@ -3,9 +3,11 @@ import { combineReducers } from 'redux';
 //was can use handy ES2015 tools to say the below rahter than import { reducer } from 'redux-form'
 import { reducer as reduxForm } from 'redux-form'
 import authReducer from './authReducer';
+import surveysReducer from './surveysReducer';
 
 export default combineReducers({
   auth: authReducer,
   //this key is very important and it's built in with reduxForm. Key is what they wan t you to use. CHeck documentation.
-  form: reduxForm
+  form: reduxForm,
+  surveys: surveysReducer
 });

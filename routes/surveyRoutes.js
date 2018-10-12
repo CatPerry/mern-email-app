@@ -9,8 +9,15 @@ const surveyTemplate = require('../services/emailTemplates/surveyTemplate')
 const Survey = mongoose.model('surveys');
 
 module.exports = app => {
+  app.get('/api/surveys', requireLogin, async (req, res) => {
+   const surveys = await Survey.find({ _user: req.user.id })
+    .select({ recipients: false });
+
+   res.send(surveys);
+  }); 
+
   //the URL path colons are allowed in Express as wildcard/dynamic/paths, just like the Path class below
-  app.get("/api/surveys/:surveyId/:choice", (req, res) => {
+  app.get('/api/surveys/:surveyId/:choice', (req, res) => {
     res.send("Thanks for your feedback!");
   });
 

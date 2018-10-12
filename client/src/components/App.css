@@ -1,5 +1,5 @@
 body { 
-  background: url('./emails.jpg') no-repeat;
+  background: linear-gradient(to top, rgba(227, 228, 230, 0.425)), url('./emails.jpg') no-repeat;
   width: 100%;
   height: 100vh;
   background-size: cover;
