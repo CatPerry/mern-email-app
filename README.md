@@ -1,8 +1,5 @@
 README
 
-VIEW VIDEO DEMO:
-<div style="position: relative; padding-bottom: 62.5%; height: 0;"><iframe src="https://www.useloom.com/embed/9d4ca834fe2840599c76dd3cbaf0fcc0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
-
 This project was bootstrapped using create-react-app
 
 It uses:
@@ -26,3 +23,8 @@ This React single-page application (SPAs) allows users to create surveys and can
 Made for marketing teams and product teams, the user's survey entries persist on the server until the user navigates away from the survey area (such as to the dashboard page or logs out).
 
 Many more usaibility features could be added, but for now this rich, lightning-fast SPA is a great start. Modeled after StephenGrider React course. 
+
+
+VIEW VIDEO DEMO:
+https://www.useloom.com/embed/9d4ca834fe2840599c76dd3cbaf0fcc0
+<div style="position: relative; padding-bottom: 62.5%; height: 0;"><iframe src="https://www.useloom.com/embed/9d4ca834fe2840599c76dd3cbaf0fcc0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
